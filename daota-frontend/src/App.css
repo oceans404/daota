@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+nav {
+  background-color: black !important;
+  color: white;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}

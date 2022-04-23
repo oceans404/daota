@@ -4,8 +4,9 @@ import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
 import Container from './components/Container';
 import Form from './components/Form';
+import DaoList from './pages/DaoList';
+import DaoDash from './pages/DaoDash';
 
-import logo from './logo.svg';
 import './App.css';
 import './styles/output.css';
 import './styles/fonts.css';
@@ -74,13 +75,13 @@ export default function App() {
               </div>
             </div>
             <div>
-              <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
+              {/* <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
                 <Link to='/new-task'>{AppText.createTask}</Link>
-              </div>
+              </div> */}
               <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
                 {walletAccount ? (
                   <span>
-                    🔌 {walletAccount.substring(0, 6)}...
+                    👋🏽 {walletAccount.substring(0, 6)}...
                     {walletAccount.substring(38)}
                   </span>
                 ) : (
@@ -93,6 +94,9 @@ export default function App() {
 
         <Routes>
           <Route path='/new-task' element={<NewTask />} />
+          <Route path='/daos/:id' element={<DaoDash />} />
+          <Route path='/daos' element={<DaoList />}></Route>
+
           <Route path='/' element={<Home walletInfo={{ walletAccount }} />} />
         </Routes>
       </div>
@@ -105,25 +109,33 @@ function Home(props) {
     walletInfo: { walletAccount = null },
   } = props;
   return (
-    <Container>
-      <div className='bg-[blue]'>
-        <h2>
-          Connected as {walletAccount || ''} to {AppText.projectName}
-        </h2>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
+    <>
+      {walletAccount && (
+        <div>
+          <Container addClasses='flex flex-row'>
+            <div className='w-1/2'>
+              <h1>Your Tasks</h1>
+              <ul>
+                <li>a</li>
+                <li>b</li>
+                <li>c</li>
+              </ul>
+            </div>
+            <div className='w-1/2'>
+              <h1>Your DAOs</h1>
+              <DaoList max={2} />
+            </div>
+          </Container>
+        </div>
+      )}
+
+      <div>
+        <Container>
+          <h1>All DAOs</h1>
+          <DaoList />
+        </Container>
       </div>
-    </Container>
+    </>
   );
 }
 
