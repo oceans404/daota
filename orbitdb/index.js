@@ -56,20 +56,31 @@ async function getField(dbKeyName, field) {
   });
 }
 
-// getField(tasksKey, 'name');
+// THIS PART WORKS! :)
 
-async function writeDoc(dbKeyName) {
+// write a record to the dbKeyName
+async function writeDoc(
+  dbKeyName,
+  record = { _id: 'hello asjdfkljsdfklas', doc: 'meow' }
+) {
   const ipfs = await IPFS.create(ipfsOptions);
   const orbitdb = await OrbitDB.createInstance(ipfs);
   const docstore = await orbitdb.docstore(dbKeyName);
-
-  docstore
-    .put({ _id: 'hello world', doc: 'all the things' })
-    .then(() => docstore.put({ _id: 'sup world', doc: 'other things' }))
-    .then(() => docstore.put({ _id: 'hello onyx', doc: 'steph' }))
-    .then(() => docstore.get('hello'))
-    .then((value) => console.log(value));
-  // [{ _id: 'hello world', doc: 'all the things'}]
+  docstore.load().then(async (abc) => {
+    await docstore.put(record);
+  });
 }
 
-writeDoc(tasksKey);
+// read all records from the dbKeyName
+async function readDocStore(dbKeyName) {
+  const ipfs = await IPFS.create(ipfsOptions);
+  const orbitdb = await OrbitDB.createInstance(ipfs);
+  const docstore = await orbitdb.docstore(dbKeyName);
+  docstore.load().then(async (abc) => {
+    const plz = docstore.query((s) => true);
+    console.log(plz);
+  });
+}
+
+// writeDoc(tasksKey);
+readDocStore(tasksKey);
