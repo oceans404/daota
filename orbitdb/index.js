@@ -7,19 +7,10 @@ const ipfsOptions = { repo: './ipfs' };
 const tasksKey = 'daota-tasks';
 
 // Create a DB and output the Orbit DB address
-// => '/orbitdb/zdpuAocvyjjT8jVrBmgzpst5n1KMVM4PrY6Nz5SVNUcP3ZMV9/${dbKeyName}'
+// => '/orbitdb/zdpuAu8akzqHGfJRU49Y6Wp9Gnr7iUR1LTmUupLYbUEsRosiD/daota-tasks'
 async function createOrbitDb(dbKeyName) {
   const ipfs = await IPFS.create(ipfsOptions);
   const orbitdb = await OrbitDB.createInstance(ipfs);
-  const db = await orbitdb.keyvalue(dbKeyName);
-  console.log(db.address.toString());
-}
-
-// Read from an Orbit DB with a known key name
-async function readDb(dbKeyName) {
-  const ipfs = await IPFS.create(ipfsOptions);
-  const orbitdb = await OrbitDB.createInstance(ipfs);
-
   const publicOptions = {
     // Give write access to everyone
     accessController: {
@@ -27,9 +18,33 @@ async function readDb(dbKeyName) {
     },
   };
   const db = await orbitdb.keyvalue(dbKeyName, publicOptions);
-
-  const identity = db.identity;
-  console.log(identity.toJSON());
+  console.log(db.address.toString());
 }
 
-readDb(tasksKey);
+//createOrbitDb(tasksKey);
+
+// Read from an Orbit DB with a known key name
+async function writeDb(dbKeyName) {
+  const ipfs = await IPFS.create(ipfsOptions);
+  const orbitdb = await OrbitDB.createInstance(ipfs);
+
+  const db = await orbitdb.keyvalue(dbKeyName);
+
+  // const identity = db.identity;
+  // console.log(identity.toJSON());
+
+  await db.put('name', 'tina', { pin: true });
+}
+
+// writeDb(tasksKey);
+
+async function getField(dbKeyName, field) {
+  const ipfsOptions = { repo: './ipfs' };
+  const ipfs = await IPFS.create(ipfsOptions);
+  const orbitdb = await OrbitDB.createInstance(ipfs);
+  const db = await orbitdb.keyvalue(dbKeyName);
+  const value = db.get(field);
+  console.log(value);
+}
+
+getField(tasksKey, 'name');
