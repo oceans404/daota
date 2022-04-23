@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
-import { OrbitProvider } from 'react-orbitdb';
 import Container from './components/Container';
 import Form from './components/Form';
 import DaoList from './pages/DaoList';
@@ -66,46 +65,42 @@ export default function App() {
   };
 
   return (
-    <OrbitProvider>
-      <Router>
-        <div>
-          <nav className='font-sans sm:text-left  bg-white shadow sm:items-baseline w-full'>
-            <Container addClasses='flex flex-col text-center sm:flex-row sm:justify-between'>
-              <div className='mb-2 sm:mb-0'>
-                <div className='text-2xl no-underline text-grey-darkest hover:text-blue-dark'>
-                  <Link to='/'>{AppText.projectName}</Link>
-                </div>
+    <Router>
+      <div>
+        <nav className='font-sans sm:text-left  bg-white shadow sm:items-baseline w-full'>
+          <Container addClasses='flex flex-col text-center sm:flex-row sm:justify-between'>
+            <div className='mb-2 sm:mb-0'>
+              <div className='text-2xl no-underline text-grey-darkest hover:text-blue-dark'>
+                <Link to='/'>{AppText.projectName}</Link>
               </div>
-              <div>
-                {/* <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
+            </div>
+            <div>
+              {/* <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
                 <Link to='/new-task'>{AppText.createTask}</Link>
               </div> */}
-                <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
-                  {walletAccount ? (
-                    <span>
-                      👋🏽 {walletAccount.substring(0, 6)}...
-                      {walletAccount.substring(38)}
-                    </span>
-                  ) : (
-                    <button onClick={handleConnectWallet}>
-                      Connect Wallet
-                    </button>
-                  )}
-                </div>
+              <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
+                {walletAccount ? (
+                  <span>
+                    👋🏽 {walletAccount.substring(0, 6)}...
+                    {walletAccount.substring(38)}
+                  </span>
+                ) : (
+                  <button onClick={handleConnectWallet}>Connect Wallet</button>
+                )}
               </div>
-            </Container>
-          </nav>
+            </div>
+          </Container>
+        </nav>
 
-          <Routes>
-            <Route path='/new-task' element={<NewTask />} />
-            <Route path='/daos/:id' element={<DaoDash />} />
-            <Route path='/daos' element={<DaoList />}></Route>
+        <Routes>
+          <Route path='/new-task' element={<NewTask />} />
+          <Route path='/daos/:id' element={<DaoDash />} />
+          <Route path='/daos' element={<DaoList />}></Route>
 
-            <Route path='/' element={<Home walletInfo={{ walletAccount }} />} />
-          </Routes>
-        </div>
-      </Router>
-    </OrbitProvider>
+          <Route path='/' element={<Home walletInfo={{ walletAccount }} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
