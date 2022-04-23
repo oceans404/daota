@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
 import Container from './components/Container';
+import Form from './components/Form';
 
 import logo from './logo.svg';
 import './App.css';
@@ -11,7 +12,7 @@ import './styles/fonts.css';
 
 const AppText = {
   projectName: 'Daota',
-  about: 'About',
+  createTask: 'Create Task',
 };
 
 const connector = new WalletConnect({
@@ -26,10 +27,11 @@ export default function App() {
     if (connector?.connected) {
       setWalletAccount(connector?.accounts && connector.accounts[0]);
     }
+    console.log(connector);
   }, []);
 
   const handleConnectWallet = () => {
-    if (!connector.connected) {
+    if (!connector.connected || !walletAccount) {
       connector.createSession();
       connector.on('connect', (error, payload) => {
         if (error) {
@@ -39,6 +41,7 @@ export default function App() {
         // Get provided accounts and chainId
         const { accounts, chainId } = payload.params[0];
         setWalletAccount(accounts && accounts[0]);
+        console.log(chainId);
       });
 
       connector.on('session_update', (error, payload) => {
@@ -71,13 +74,13 @@ export default function App() {
               </div>
             </div>
             <div>
-              {/* <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
-                <Link to='/about'>{AppText.about}</Link>
-              </div> */}
+              <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
+                <Link to='/new-task'>{AppText.createTask}</Link>
+              </div>
               <div className='text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2'>
                 {walletAccount ? (
                   <span>
-                    Connected as {walletAccount.substring(0, 6)}...
+                    🔌 {walletAccount.substring(0, 6)}...
                     {walletAccount.substring(38)}
                   </span>
                 ) : (
@@ -89,7 +92,7 @@ export default function App() {
         </nav>
 
         <Routes>
-          <Route path='/about' element={<About />} />
+          <Route path='/new-task' element={<NewTask />} />
           <Route path='/' element={<Home walletInfo={{ walletAccount }} />} />
         </Routes>
       </div>
@@ -124,6 +127,13 @@ function Home(props) {
   );
 }
 
-function About() {
-  return <h2>{AppText.about}</h2>;
+function NewTask() {
+  return (
+    <div>
+      <Container>
+        <h2>{AppText.createTask}</h2>
+        <Form />
+      </Container>
+    </div>
+  );
 }
