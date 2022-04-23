@@ -24,12 +24,12 @@ export default function DaoDash(props) {
   return (
     <div>
       <Container>
-        <div className='flex flex-row'>
+        <div className='flex flex-row flex-between'>
           <div className='w-1/3'>
             <Card {...currentDao} tags={null} />
           </div>
-          <div className='w-2/3'>
-            <h2>Open Tasks</h2>
+          <div className='w-2/3 ml-3'>
+            <h2>All Tasks</h2>
           </div>
         </div>
       </Container>
