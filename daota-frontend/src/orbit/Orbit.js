@@ -1,18 +1,41 @@
-const IPFS = require('ipfs')
-const OrbitDB = require('orbit-db')
+import './types.js';
 
-// TODO get orbit wired in and working
-async function main () {
-  // Create IPFS instance
-  const ipfsOptions = { repo : './ipfs', }
-  const ipfs = await IPFS.create(ipfsOptions)
+try {
+  const IPFS = require("ipfs");
+  const OrbitDB = require("orbit-db");
 
-  // Create OrbitDB instance
-  const orbitdb = await OrbitDB.createInstance(ipfs)
-  this.docstore = await orbitdb.docstore('DAOtabase')
+  module.exports = exports = new NewPiecePlease(Ipfs, OrbitDB);
+} catch (e) {
+  window.NPP = new OrbitComponent(window.IPFS, window.OrbitDB);
+}
 
-  console.log("Orbit instance generated")
+class OrbitComponent {
+  constructor(IPFS, OrbitDB) {
+    this.OrbitDB = OrbitDB;
 
+    this.node = new IPFS({
+      preload: { enabled: false },
+      repo: "./ipfs",
+      EXPERIMENTAL: { pubsub: true },
+      config: {
+        Bootstrap: [],
+        Addresses: { Swarm: [] }
+      }
+    });
+
+    this.node.on("error", e => {
+      throw e;
+    });
+    this.node.on("ready", this._init.bind(this));
+  }
+
+  async _init() {
+    this.orbitdb = await this.OrbitDB.createInstance(this.node);
+    this.onready();
+    this.docstore = await orbitdb.docstore('DAOtabase');
+
+    console.log("Orbit instance generated")
+  }
 }
 
 function createUser(user) {
