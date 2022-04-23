@@ -13141,7 +13141,7 @@
   dependencies:
     "crdts" "~0.1.2"
 
-"orbit-db-docstore@~1.12.0":
+"orbit-db-docstore@^1.12.0", "orbit-db-docstore@~1.12.0":
   "integrity" "sha512-AivU+G1y55qon2M8KY2SOV0nlCqzkc1+UpaFqtRtzH2NSPjsjnyr4Bhv+X/K+lXKQJPFnOMCiga+FspDjiKe3w=="
   "resolved" "https://registry.npmjs.org/orbit-db-docstore/-/orbit-db-docstore-1.12.0.tgz"
   "version" "1.12.0"
