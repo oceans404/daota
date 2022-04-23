@@ -4,10 +4,10 @@ const OrbitDB = require('orbit-db');
 // https://github.com/orbitdb/orbit-db/blob/main/GUIDE.md
 
 const ipfsOptions = { repo: './ipfs' };
-const tasksKey = 'daota-tasks';
+const tasksKey = 'daota-dao-tasks';
 
-// Create a DB and output the Orbit DB address
-// => '/orbitdb/zdpuAu8akzqHGfJRU49Y6Wp9Gnr7iUR1LTmUupLYbUEsRosiD/daota-tasks'
+// Create a public DB and output the Orbit DB address
+// => '/orbitdb/zdpuB1MbYeikexfs145CXHYDR9JdABQXWu2UGxXsE3c1tTHG4/daota-dao-tasks'
 async function createOrbitDb(dbKeyName) {
   const ipfs = await IPFS.create(ipfsOptions);
   const orbitdb = await OrbitDB.createInstance(ipfs);
@@ -21,7 +21,7 @@ async function createOrbitDb(dbKeyName) {
   console.log(db.address.toString());
 }
 
-//createOrbitDb(tasksKey);
+// createOrbitDb(tasksKey);
 
 // Read from an Orbit DB with a known key name
 async function writeDb(dbKeyName) {
@@ -30,21 +30,21 @@ async function writeDb(dbKeyName) {
 
   const db = await orbitdb.keyvalue(dbKeyName);
 
-  // const identity = db.identity;
-  // console.log(identity.toJSON());
-
-  await db.put('name', 'tina', { pin: true });
+  await db.set('name', 'steph', { pin: true }).then(async () => {
+    const value = await db.get('name');
+    console.log(value);
+  });
 }
 
-// writeDb(tasksKey);
-
+// Get a field in a DB
 async function getField(dbKeyName, field) {
-  const ipfsOptions = { repo: './ipfs' };
   const ipfs = await IPFS.create(ipfsOptions);
   const orbitdb = await OrbitDB.createInstance(ipfs);
+
   const db = await orbitdb.keyvalue(dbKeyName);
-  const value = db.get(field);
-  console.log(value);
+  db.load().then(() => {
+    console.log(db.get(field)); //this === undefined
+  });
 }
 
 getField(tasksKey, 'name');
