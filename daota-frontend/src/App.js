@@ -1,15 +1,15 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useMatch,
-  useParams,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
+import './styles/output.css';
+import './styles/fonts.css';
+
+const AppText = {
+  projectName: 'Daota',
+  about: 'About',
+};
 
 export default function App() {
   return (
@@ -17,10 +17,10 @@ export default function App() {
       <div>
         <ul>
           <li>
-            <Link to='/'>Home</Link>
+            <Link to='/'>{AppText.projectName}</Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link to='/about'>{AppText.about}</Link>
           </li>
         </ul>
 
@@ -35,8 +35,8 @@ export default function App() {
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
+    <div className='bg-[blue]'>
+      <h2>{AppText.projectName}</h2>
       <img src={logo} className='App-logo' alt='logo' />
       <p>
         Edit <code>src/App.js</code> and save to reload.
@@ -54,5 +54,5 @@ function Home() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return <h2>{AppText.about}</h2>;
 }
