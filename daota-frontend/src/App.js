@@ -108,6 +108,9 @@ function Home(props) {
   const {
     walletInfo: { walletAccount = null },
   } = props;
+
+  const endpoint =
+    '/orbitdb/zdpuB2ALKMKkhTJzVwAQ7rQeVkxnBYBP9Zs2J4GD2aYMdbjCX/daota-tasks';
   return (
     <>
       {walletAccount && (

@@ -12,33 +12,7 @@ import {
 } from 'recharts';
 import Container from '../components/Container';
 import daos from '../mockData/daos';
-
-const data = [
-  {
-    name: 'Jan 22',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Feb 22',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Mar 22',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Apr 22',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-];
+import Card from '../components/Card';
 
 export default function DaoDash(props) {
   const { pathname } = useLocation();
@@ -50,9 +24,14 @@ export default function DaoDash(props) {
   return (
     <div>
       <Container>
-        <h1>{currentDao.title}</h1>
-
-        <h2>Open Tasks</h2>
+        <div className='flex flex-row'>
+          <div className='w-1/3'>
+            <Card {...currentDao} tags={null} />
+          </div>
+          <div className='w-2/3'>
+            <h2>Open Tasks</h2>
+          </div>
+        </div>
       </Container>
     </div>
   );
