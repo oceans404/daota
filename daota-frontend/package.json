@@ -16,10 +16,7 @@
     "graphql-request": "^4.1.0",
     "ipfs": "^0.62.2",
     "orbit-db": "^0.28.3",
-<<<<<<< HEAD
-=======
     "orbit-db-docstore": "^1.12.0",
->>>>>>> 36709e3 (Adding Orbit for decentralized data storage)
     "react": "18",
     "react-dom": "18",
     "react-router-dom": "^6.2.2",
