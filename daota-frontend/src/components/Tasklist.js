@@ -17,7 +17,7 @@ function Tasklist(props) {
               <li class=' w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600'>
                 <div className='flex flex-row justify-between'>
                   <div>
-                    {t.complete && '✅ '}
+                    {t.complete ? '✅ ' : '🚧 '}
                     <strong>{t.task}</strong>
                   </div>
                   <div>{t.dao}</div>
