@@ -19,10 +19,10 @@ const daos = [
   {
     id: '3',
     imgUrl:
-      'https://pbs.twimg.com/profile_images/1507740882027565065/e8jLN9O5_400x400.jpg',
-    title: 'H.E.R. DAO',
-    description: '4% decentralized',
-    tags: ['gender', 'onboarding'],
+      'https://pbs.twimg.com/profile_images/1511561016630513667/aOfcj65z_400x400.jpg',
+    title: 'Vegan Africa DAO',
+    description: '24% decentralized',
+    tags: ['environment'],
   },
   {
     id: '4',
