@@ -30,3 +30,7 @@ Doara is a project management and DAO analytics tracker. Think of it as a decent
 
 ### Data
 - [Dune](https://dune.com/) to determine DAO member count (number of wallets holding the social token).
+
+## The team
+Christina, Mabel, Shantelle, Steph, and Sunny 
+![2022-04-24 04 08 24](https://user-images.githubusercontent.com/91382964/164952917-c659b2a0-96bd-427a-b89c-45a3db13bb8e.jpg)
