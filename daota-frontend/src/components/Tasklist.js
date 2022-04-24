@@ -25,7 +25,7 @@ function Tasklist(props) {
                 {isVerbose && (
                   <ul>
                     <li> - Description: {t.description}</li>
-                    <li> - Bounty: {t.bounty} $ONE</li>
+                    <li> - Bounty: {t.bounty} MATIC</li>
                   </ul>
                 )}
               </li>
