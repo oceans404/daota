@@ -30,7 +30,7 @@ export default function DaoDash(props) {
               </Link>
             </div>
 
-            <Tasklist dao={'Blu3 DAO'} isVerbose />
+            <Tasklist dao={daoId === 1 ? 'Blu3 DAO' : 'FWB'} isVerbose />
           </div>
         </div>
       </Container>
