@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import WalletConnect from '@walletconnect/client';
 import QRCodeModal from '@walletconnect/qrcode-modal';
 import Container from './components/Container';
+import Tasklist from './components/Tasklist';
 import Form from './components/Form';
 import DaoList from './pages/DaoList';
 import DaoDash from './pages/DaoDash';
@@ -12,7 +13,7 @@ import './styles/output.css';
 import './styles/fonts.css';
 
 const AppText = {
-  projectName: 'Daota',
+  projectName: 'Daora',
   createTask: 'Create Task',
 };
 
@@ -118,11 +119,7 @@ function Home(props) {
           <Container addClasses='flex flex-row'>
             <div className='w-1/2'>
               <h1>Your Tasks</h1>
-              <ul>
-                <li>a</li>
-                <li>b</li>
-                <li>c</li>
-              </ul>
+              <Tasklist />
             </div>
             <div className='w-1/2'>
               <h1>Your DAOs</h1>

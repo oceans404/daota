@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
-import daos from '../mockData/daos';
+import daos from '../ourData/daos';
 
 export default function DaoList(props) {
   return (

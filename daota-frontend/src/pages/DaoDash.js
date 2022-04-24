@@ -1,17 +1,9 @@
 import { useLocation } from 'react-router-dom';
 import React from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { Link } from 'react-router-dom';
 import Container from '../components/Container';
-import daos from '../mockData/daos';
+import Tasklist from '../components/Tasklist';
+import daos from '../ourData/daos';
 import Card from '../components/Card';
 
 export default function DaoDash(props) {
@@ -29,7 +21,16 @@ export default function DaoDash(props) {
             <Card {...currentDao} tags={null} />
           </div>
           <div className='w-2/3 ml-3'>
-            <h2>All Tasks</h2>
+            <div className='flex flex-row justify-between'>
+              <h2>All Tasks</h2>
+              <Link to='/new-task'>
+                <button class='bg-black hover:bg-gray text-white font-bold py-2 px-4 rounded'>
+                  Add new task
+                </button>
+              </Link>
+            </div>
+
+            <Tasklist dao={'Blu3 DAO'} isVerbose />
           </div>
         </div>
       </Container>
