@@ -132,7 +132,7 @@ function Home(props) {
       <div>
         <Container>
           <h1>All DAOs</h1>
-          <DaoList />
+          <DaoList noLinks />
         </Container>
       </div>
     </>
